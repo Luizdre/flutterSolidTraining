@@ -18,7 +18,11 @@ class LoginUsecase implements ILoginUsecase {
     if (params.password.isEmpty) {
       throw AuthException('Senha invalida');
     }
-    return await authRepository.login(params);
+    try {
+      return await authRepository.login(params);
+    } catch (e) {
+      throw Exception('Erro no repository');
+    }
   }
 }
 

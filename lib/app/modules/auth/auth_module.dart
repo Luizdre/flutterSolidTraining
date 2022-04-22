@@ -6,7 +6,7 @@ import 'auth_page.dart';
 class AuthModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => AuthStore()),
+    Bind.lazySingleton((i) => AuthStore(i.get())),
   ];
 
   @override

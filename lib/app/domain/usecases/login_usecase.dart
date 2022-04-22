@@ -27,8 +27,8 @@ class LoginUsecase implements ILoginUsecase {
 }
 
 class CredentialsParams {
-  final String email;
-  final String password;
+  String email;
+  String password;
 
   CredentialsParams({required this.email, required this.password});
 }

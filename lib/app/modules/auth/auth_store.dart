@@ -1,14 +1,29 @@
 import 'package:mobx/mobx.dart';
+import 'package:solid/app/domain/entities/logged_user.dart';
+import 'package:solid/app/domain/usecases/login_usecase.dart';
 
 part 'auth_store.g.dart';
 
 class AuthStore = AuthStoreBase with _$AuthStore;
 
 abstract class AuthStoreBase with Store {
-  @observable
-  int counter = 0;
+  final LoginUsecase _loginUsecase;
 
-  Future<void> increment() async {
-    counter = counter + 1;
+  AuthStoreBase(this._loginUsecase);
+
+  @observable
+  CredentialsParams params = CredentialsParams(email: '', password: '');
+
+  @observable
+  bool obscured = false;
+
+  Future<LoggedUser> doLogin() async {
+    LoggedUser logged = await _loginUsecase.execute(params);
+    return logged;
+  }
+
+  @action
+  turnObscure() {
+    obscured = !obscured;
   }
 }
